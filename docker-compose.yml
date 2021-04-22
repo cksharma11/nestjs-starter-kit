@@ -1,0 +1,29 @@
+version: '3'
+services:
+  racservice:
+    container_name: racservice
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      POSTGRES_HOST: 13.234.76.69
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: rac
+      POSTGRES_DATABASE: racservice
+      POSTGRES_PASSWORD: adgjmptw
+      PORT: 3000
+
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: racservice
+      POSTGRES_USER: rac
